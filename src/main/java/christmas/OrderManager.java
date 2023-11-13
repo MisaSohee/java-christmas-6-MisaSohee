@@ -1,5 +1,7 @@
 package christmas;
 
+import org.mockito.internal.matchers.Or;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,9 @@ public class OrderManager {
 
     public void manageOrder() {
         String orderInput = inputView.getUserOrderInput();
+
+        OrderValidator.validateNoSpaceInInput(orderInput);
+
         String[] orders = orderInput.split(",");
 
         Map<Menu, Integer> orderMap = new HashMap<>();
@@ -15,9 +20,14 @@ public class OrderManager {
         for (String order : orders) {
             String[] details = order.split("-");
             String menuName = details[0];
-            String quantitystr = details[1];
+            String quantityStr = details[1];
 
-            int quantity = Integer.parseInt(quantitystr);
+            OrderValidator.validateMenuExist(menuName);
+            OrderValidator.validateQuantityIsNumber(quantityStr);
+            OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
+
+            int quantity = Integer.parseInt(quantityStr);
+
             Menu menu = Menu.from(menuName);
             orderMap.put(menu, quantity);
         }
