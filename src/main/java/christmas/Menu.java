@@ -1,5 +1,9 @@
 package christmas;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public enum Menu {
     YANGSONGISOUP("양송이수프", 6000,Category.APPETIZER),
     TAPAS("타파스", 5500, Category.APPETIZER),
@@ -23,5 +27,12 @@ public enum Menu {
         this.name = name;
         this.price = price;
         this.category = category;
+    }
+
+    public static Menu from(String name) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name.equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."));
     }
 }

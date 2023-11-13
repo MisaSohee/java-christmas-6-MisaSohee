@@ -33,4 +33,9 @@ public class InputView {
             throw new IllegalArgumentException();
         }
     }
+
+    public String getUserOrderInput() {
+        String orderInput = Console.readLine();
+        return orderInput;
+    }
 }

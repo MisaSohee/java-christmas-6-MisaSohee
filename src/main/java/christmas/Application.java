@@ -10,5 +10,7 @@ public class Application {
 
         InputView inputView = new InputView();
         int date = inputView.readDate();
+
+        outputView.requestOrder();
     }
 }
