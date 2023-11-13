@@ -1,5 +1,7 @@
 package christmas;
 
+import java.util.Map;
+
 public class OutputView {
     public void printEventGuidelines(){
         System.out.println("""
@@ -32,5 +34,13 @@ public class OutputView {
 
     public void requestOrder() {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
+    }
+
+    public static void printOrder(Map<Menu, Integer> orderMap) {
+        System.out.println("<주문 메뉴>");
+        for (Menu menu : orderMap.keySet()) {
+            Integer quantity = orderMap.get(menu);
+            System.out.println(menu.getName() + " " + quantity + "개");
+        }
     }
 }

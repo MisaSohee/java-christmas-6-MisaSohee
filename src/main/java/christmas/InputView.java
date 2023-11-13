@@ -2,10 +2,6 @@ package christmas;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class InputView {
     public int readDate() {
         while (true){
@@ -34,7 +30,7 @@ public class InputView {
         }
     }
 
-    public String getUserOrderInput() {
+    public static String getUserOrderInput() {
         String orderInput = Console.readLine();
         return orderInput;
     }

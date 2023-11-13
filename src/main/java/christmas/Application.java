@@ -1,5 +1,7 @@
 package christmas;
 
+import java.util.Map;
+
 public class Application {
     public static void main(String[] args) {
 
@@ -12,5 +14,8 @@ public class Application {
         int date = inputView.readDate();
 
         outputView.requestOrder();
+
+        Map<Menu, Integer> orderMap = OrderManager.manageOrder();
+        OutputView.printOrder(orderMap);
     }
 }

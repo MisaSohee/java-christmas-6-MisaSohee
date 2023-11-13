@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderManager {
-    InputView inputView = new InputView();
 
-    public void manageOrder() {
-        String orderInput = inputView.getUserOrderInput();
+    public static Map<Menu, Integer> manageOrder() {
+        String orderInput = InputView.getUserOrderInput();
 
         OrderValidator.validateNoSpaceInInput(orderInput);
 
@@ -37,5 +36,7 @@ public class OrderManager {
         }
 
         OrderValidator.validateNotOnlyDrinks(orderMap);
+
+        return orderMap;
     }
 }
