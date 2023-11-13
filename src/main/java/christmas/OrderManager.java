@@ -1,5 +1,6 @@
 package christmas;
 
+import org.junit.jupiter.api.Order;
 import org.mockito.internal.matchers.Or;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class OrderManager {
             OrderValidator.validateMenuExist(menuName);
             OrderValidator.validateQuantityIsNumber(quantityStr);
             OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
+            OrderValidator.validateMaxQuantity(Integer.parseInt(quantityStr));
 
             int quantity = Integer.parseInt(quantityStr);
 
