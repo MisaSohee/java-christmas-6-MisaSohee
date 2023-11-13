@@ -15,8 +15,9 @@ public class OrderManager {
         for (String order : orders) {
             String[] details = order.split("-");
             String menuName = details[0];
-            int quantity = Integer.parseInt(details[1]);
+            String quantitystr = details[1];
 
+            int quantity = Integer.parseInt(quantitystr);
             Menu menu = Menu.from(menuName);
             orderMap.put(menu, quantity);
         }
