@@ -16,6 +16,8 @@ public class OrderManager {
 
         String[] orders = orderInput.split(",");
 
+        OrderValidator.validateNoDuplicateMenuNames(orders);
+
         Map<Menu, Integer> orderMap = new HashMap<>();
 
         for (String order : orders) {
