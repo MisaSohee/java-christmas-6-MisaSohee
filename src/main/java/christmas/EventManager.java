@@ -22,4 +22,15 @@ public class EventManager {
         }
         return totalPrice;
     }
+
+    public static int applyWeekendDiscount(int totalPrice, int orderDate, int numberOfMainDishes) {
+        LocalDate date = LocalDate.of(2023, 12, orderDate);
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+
+        if (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY) {
+            int discount = 2023 * numberOfMainDishes; // 메인 메뉴를 1개당 2,023원 할인
+            return totalPrice - discount;
+        }
+        return totalPrice;
+    }
 }
