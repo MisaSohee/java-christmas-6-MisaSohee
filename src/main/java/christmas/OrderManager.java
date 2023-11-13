@@ -9,34 +9,38 @@ import java.util.Map;
 public class OrderManager {
 
     public static Map<Menu, Integer> manageOrder() {
-        String orderInput = InputView.getUserOrderInput();
-
-        OrderValidator.validateNoSpaceInInput(orderInput);
-
-        String[] orders = orderInput.split(",");
-
-        OrderValidator.validateNoDuplicateMenuNames(orders);
-
         Map<Menu, Integer> orderMap = new HashMap<>();
 
-        for (String order : orders) {
-            String[] details = order.split("-");
-            String menuName = details[0];
-            String quantityStr = details[1];
+        try {
+            String orderInput = InputView.getUserOrderInput();
 
-            OrderValidator.validateMenuExist(menuName);
-            OrderValidator.validateQuantityIsNumber(quantityStr);
-            OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
-            OrderValidator.validateMaxQuantity(Integer.parseInt(quantityStr));
+            OrderValidator.validateNoSpaceInInput(orderInput);
 
-            int quantity = Integer.parseInt(quantityStr);
+            String[] orders = orderInput.split(",");
 
-            Menu menu = Menu.from(menuName);
-            orderMap.put(menu, quantity);
+            OrderValidator.validateNoDuplicateMenuNames(orders);
+
+            for (String order : orders) {
+                String[] details = order.split("-");
+                String menuName = details[0];
+                String quantityStr = details[1];
+
+                OrderValidator.validateMenuExist(menuName);
+                OrderValidator.validateQuantityIsNumber(quantityStr);
+                OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
+
+                int quantity = Integer.parseInt(quantityStr);
+
+                Menu menu = Menu.from(menuName);
+                orderMap.put(menu, quantity);
+            }
+
+            OrderValidator.validateTotalMaxQuantity(orderMap);
+            OrderValidator.validateNotOnlyDrinks(orderMap);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return manageOrder();
         }
-
-        OrderValidator.validateNotOnlyDrinks(orderMap);
-
         return orderMap;
     }
 }
