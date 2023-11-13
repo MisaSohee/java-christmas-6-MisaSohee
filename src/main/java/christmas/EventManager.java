@@ -44,4 +44,10 @@ public class EventManager {
         }
         return totalPrice;
     }
+
+    public static boolean isEligibleForGift(int totalPriceBeforeDiscount) {
+        final int GIFT_THRESHOLD = 120000;
+
+        return totalPriceBeforeDiscount >= GIFT_THRESHOLD;
+    }
 }
