@@ -2,6 +2,8 @@ package christmas;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 public class EventManager {
     public static int applyDdayDiscount(int totalPrice, int orderDate) {
@@ -28,8 +30,17 @@ public class EventManager {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
 
         if (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY) {
-            int discount = 2023 * numberOfMainDishes; // 메인 메뉴를 1개당 2,023원 할인
+            int discount = 2023 * numberOfMainDishes;
             return totalPrice - discount;
+        }
+        return totalPrice;
+    }
+
+    public static int applySpecialDiscount(int totalPrice, int orderDate) {
+        List<Integer> specialDays = Arrays.asList(3, 10, 17, 24, 25, 31);
+
+        if (specialDays.contains(orderDate)) {
+            return totalPrice - 1000;
         }
         return totalPrice;
     }
