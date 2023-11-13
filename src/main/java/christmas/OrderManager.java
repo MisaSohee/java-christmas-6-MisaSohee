@@ -35,5 +35,7 @@ public class OrderManager {
             Menu menu = Menu.from(menuName);
             orderMap.put(menu, quantity);
         }
+
+        OrderValidator.validateNotOnlyDrinks(orderMap);
     }
 }

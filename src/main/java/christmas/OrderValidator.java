@@ -1,6 +1,7 @@
 package christmas;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class OrderValidator {
@@ -47,5 +48,14 @@ public class OrderValidator {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
+    }
+
+    public static void validateNotOnlyDrinks(Map<Menu, Integer> orderMap) {
+        for (Menu menu : orderMap.keySet()) {
+            if (menu.getCategory() != Category.DRINK) {
+                return;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 음료만 주문하실 수 없습니다. 다른 메뉴를 추가해주세요.");
     }
 }
