@@ -50,4 +50,27 @@ class OrderValidatorTest {
             OrderValidator.validateQuantityIsNumber(nonNumberQuantity);
         });
     }
+
+    @Test
+    @DisplayName("입력 유효성 검사: 입력에 공백이 포함되어 있을 경우 IllegalArgumentException 발생")
+    void 입력에_공백이_포함되어_있을_경우_IllegalArgumentException_발생() {
+        String inputWithSpace = "티본 스테이크-1";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            OrderValidator.validateNoSpaceInInput(inputWithSpace);
+        });
+    }
+
+    @Test
+    @DisplayName("주문 형식 유효성 검사: 주문이 '-'를 포함하지 않을 경우 IllegalArgumentException 발생")
+    void 주문이_하이픈을_포함하지_않을_경우_IllegalArgumentException_발생() {
+        // Given
+        String orderWithoutHyphen = "티본스테이크 1,바비큐립 1";
+
+        // Then
+        assertThrows(IllegalArgumentException.class, () -> {
+            // When
+            OrderValidator.validateOrderFormat(orderWithoutHyphen);
+        });
+    }
 }
