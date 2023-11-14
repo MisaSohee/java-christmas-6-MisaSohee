@@ -40,6 +40,10 @@ public enum Menu {
         return name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public Category getCategory() {
         return category;
     }

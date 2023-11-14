@@ -15,7 +15,8 @@ public class Application {
 
         outputView.requestOrder();
 
-        Map<Menu, Integer> orderMap = OrderManager.manageOrder();
-        OutputView.printOrder(orderMap);
+        OrderInfo orderInfo = OrderManager.manageOrder(date);
+        Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
+        OutputView.printOrder(orderMap, date);
     }
 }

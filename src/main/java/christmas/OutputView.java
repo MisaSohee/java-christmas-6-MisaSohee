@@ -36,7 +36,8 @@ public class OutputView {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
     }
 
-    public static void printOrder(Map<Menu, Integer> orderMap) {
+    public static void printOrder(Map<Menu, Integer> orderMap, int date) {
+        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         System.out.println("<주문 메뉴>");
         for (Menu menu : orderMap.keySet()) {
             Integer quantity = orderMap.get(menu);

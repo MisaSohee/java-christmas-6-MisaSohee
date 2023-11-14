@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderManager {
-    public static Map<Menu, Integer> manageOrder() {
+    public static OrderInfo manageOrder(int visitDate) {
         Map<Menu, Integer> orderMap = new HashMap<>();
 
         try {
@@ -18,9 +18,9 @@ public class OrderManager {
             validateOrderInfo(orderMap);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return manageOrder();
+            return manageOrder(visitDate);
         }
-        return orderMap;
+        return new OrderInfo(visitDate, orderMap);
     }
 
     private static String[] getOrderInput() {
