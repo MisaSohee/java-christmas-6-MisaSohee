@@ -64,13 +64,6 @@ public class EventManager {
         return 0;
     }
 
-    public static int calculateGiftDiscount(int totalPriceBeforeDiscount) {
-        if (isEligibleForGift(totalPriceBeforeDiscount)) {
-            return GIFT_MENU_PRICE;
-        }
-        return 0;
-    }
-
     private static int getDessertCount(Map<Menu, Integer> orderMap) {
         int dessertCount = 0;
         for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
@@ -92,38 +85,58 @@ public class EventManager {
     }
 
     public static EventDetail calculateEventDetails(OrderInfo orderInfo) {
-        EventDetail eventDetail = new EventDetail();
         int orderDate = orderInfo.getVisitDate();
         Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
         int totalPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
+        EventDetail eventDetail = new EventDetail();
 
         if (totalPrice >= 10000) {
-            int ddayDiscount = calculateDdayDiscount(orderDate);
-            if (ddayDiscount > 0) {
-                eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount, false);
-            }
-
-            int weekdayDiscount = calculateWeekdayDiscount(orderMap, orderDate);
-            if (weekdayDiscount > 0) {
-                eventDetail.addEvent("평일 할인", weekdayDiscount, false);
-            }
-
-            int weekendDiscount = calculateWeekendDiscount(orderMap, orderDate);
-            if (weekendDiscount > 0) {
-                eventDetail.addEvent("주말 할인", weekendDiscount, false);
-            }
-
-            int specialDiscount = calculateSpecialDiscount(orderDate);
-            if (specialDiscount > 0) {
-                eventDetail.addEvent("특별 할인", specialDiscount, false);
-            }
-
-            if (isEligibleForGift(totalPrice)) {
-                eventDetail.changeGiftMenu("샴페인");
-                eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE, true);
-            }
+            calculateDiscountsAndAddEvents(eventDetail, orderDate, orderMap);
+            checkGiftEligibilityAndAddEvent(eventDetail, totalPrice);
         }
 
         return eventDetail;
+    }
+
+    private static void calculateDiscountsAndAddEvents(EventDetail eventDetail, int orderDate, Map<Menu, Integer> orderMap) {
+        addDdayDiscountEvent(eventDetail, orderDate);
+        addWeekdayDiscountEvent(eventDetail, orderDate, orderMap);
+        addWeekendDiscountEvent(eventDetail, orderDate, orderMap);
+        addSpecialDiscountEvent(eventDetail, orderDate);
+    }
+
+    private static void addDdayDiscountEvent(EventDetail eventDetail, int orderDate) {
+        int ddayDiscount = calculateDdayDiscount(orderDate);
+        if (ddayDiscount > 0) {
+            eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount, false);
+        }
+    }
+
+    private static void addWeekdayDiscountEvent(EventDetail eventDetail, int orderDate, Map<Menu, Integer> orderMap) {
+        int weekdayDiscount = calculateWeekdayDiscount(orderMap, orderDate);
+        if (weekdayDiscount > 0) {
+            eventDetail.addEvent("평일 할인", weekdayDiscount, false);
+        }
+    }
+
+    private static void addWeekendDiscountEvent(EventDetail eventDetail, int orderDate, Map<Menu, Integer> orderMap) {
+        int weekendDiscount = calculateWeekendDiscount(orderMap, orderDate);
+        if (weekendDiscount > 0) {
+            eventDetail.addEvent("주말 할인", weekendDiscount, false);
+        }
+    }
+
+    private static void addSpecialDiscountEvent(EventDetail eventDetail, int orderDate) {
+        int specialDiscount = calculateSpecialDiscount(orderDate);
+        if (specialDiscount > 0) {
+            eventDetail.addEvent("특별 할인", specialDiscount, false);
+        }
+    }
+
+    private static void checkGiftEligibilityAndAddEvent(EventDetail eventDetail, int totalPrice) {
+        if (isEligibleForGift(totalPrice)) {
+            eventDetail.changeGiftMenu("샴페인");
+            eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE, true);
+        }
     }
 }
