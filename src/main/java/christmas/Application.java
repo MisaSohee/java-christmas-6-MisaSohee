@@ -27,5 +27,7 @@ public class Application {
         OutputView.printEvents(eventDetail);
 
         OutputView.printTotalBenefit(eventDetail);
+
+        OutputView.printExpectedPayment(orderInfo,eventDetail);
     }
 }

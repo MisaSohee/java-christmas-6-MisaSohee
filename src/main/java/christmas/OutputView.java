@@ -74,4 +74,14 @@ public class OutputView {
         System.out.println("\n<총 혜택 금액>");
         System.out.println("-" + eventDetail.calculateTotalBenefit() + "원");
     }
+
+    public static void printExpectedPayment(OrderInfo orderInfo, EventDetail eventDetail) {
+        Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
+        int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
+        int totalDiscount = eventDetail.calculateDiscount();
+        int expectedPayment = totalOrderPrice - totalDiscount;
+
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        System.out.println(expectedPayment + "원");
+    }
 }

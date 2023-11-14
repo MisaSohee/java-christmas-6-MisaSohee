@@ -7,15 +7,21 @@ public class EventDetail {
     private List<String> events;
     private String giftMenu;
     private int discount;
+    private int giftPrice;
 
     public EventDetail() {
         events = new ArrayList<>();
         giftMenu = "없음";
         discount = 0;
+        giftPrice = 0;
     }
 
-    public void addEvent(String event, int discount) {
+    public void addEvent(String event, int discount, boolean isGift) {
         events.add(event + ": -" + discount + "원");
+        if (isGift) {
+            this.giftPrice = discount;
+            return;
+        }
         this.discount += discount;
     }
 
@@ -24,6 +30,10 @@ public class EventDetail {
     }
 
     public int calculateTotalBenefit() {
+        return discount + giftPrice;
+    }
+
+    public int calculateDiscount() {
         return discount;
     }
 

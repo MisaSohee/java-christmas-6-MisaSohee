@@ -99,27 +99,27 @@ public class EventManager {
 
         int ddayDiscount = calculateDdayDiscount(orderDate);
         if (ddayDiscount > 0) {
-            eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount);
+            eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount, false);
         }
 
         int weekdayDiscount = calculateWeekdayDiscount(orderMap, orderDate);
         if (weekdayDiscount > 0) {
-            eventDetail.addEvent("평일 할인", weekdayDiscount);
+            eventDetail.addEvent("평일 할인", weekdayDiscount, false);
         }
 
         int weekendDiscount = calculateWeekendDiscount(orderMap, orderDate);
         if (weekendDiscount > 0) {
-            eventDetail.addEvent("주말 할인", weekendDiscount);
+            eventDetail.addEvent("주말 할인", weekendDiscount, false);
         }
 
         int specialDiscount = calculateSpecialDiscount(orderDate);
         if (specialDiscount > 0) {
-            eventDetail.addEvent("특별 할인", specialDiscount);
+            eventDetail.addEvent("특별 할인", specialDiscount, false);
         }
 
         if (isEligibleForGift(totalPrice)) {
             eventDetail.changeGiftMenu("샴페인");
-            eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE);
+            eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE, true);
         }
 
         return eventDetail;
