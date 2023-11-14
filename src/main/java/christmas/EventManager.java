@@ -118,7 +118,7 @@ public class EventManager {
         }
 
         if (isEligibleForGift(totalPrice)) {
-            eventDetail.setGiftMenu("샴페인");
+            eventDetail.changeGiftMenu("샴페인");
             eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE);
         }
 

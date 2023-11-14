@@ -20,5 +20,8 @@ public class Application {
         OutputView.printOrder(orderMap, date);
 
         OutputView.printTotalOrderPrice(orderInfo);
+
+        EventDetail eventDetail = EventManager.calculateEventDetails(orderInfo);
+        OutputView.printGiftMenu(eventDetail);
     }
 }

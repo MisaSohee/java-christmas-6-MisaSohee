@@ -50,4 +50,9 @@ public class OutputView {
         int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
         System.out.println("\n<할인 전 총주문 금액>\n" + totalOrderPrice+ "원");
     }
+
+    public static void printGiftMenu(EventDetail eventDetail) {
+        System.out.println("\n<증정 메뉴>");
+        System.out.println(eventDetail.getGiftMenu());
+    }
 }

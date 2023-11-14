@@ -26,4 +26,12 @@ public class EventDetail {
     public int calculateTotalBenefit() {
         return discount;
     }
+
+    public void changeGiftMenu(String giftMenu) {
+        this.giftMenu = giftMenu + " 1개";
+    }
+
+    public String getGiftMenu() {
+        return giftMenu;
+    }
 }
