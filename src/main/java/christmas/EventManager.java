@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class EventManager {
+    private static final int GIFT_MENU_PRICE = 25000;
+
     public static boolean isDdayDiscountApplied(int orderDate) {
         return orderDate <= 25;
     }
@@ -87,5 +89,39 @@ public class EventManager {
             }
         }
         return mainCount;
+    }
+
+    public static EventDetail calculateEventDetails(OrderInfo orderInfo) {
+        EventDetail eventDetail = new EventDetail();
+        int orderDate = orderInfo.getVisitDate();
+        Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
+        int totalPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
+
+        int ddayDiscount = calculateDdayDiscount(orderDate);
+        if (ddayDiscount > 0) {
+            eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount);
+        }
+
+        int weekdayDiscount = calculateWeekdayDiscount(orderMap, orderDate);
+        if (weekdayDiscount > 0) {
+            eventDetail.addEvent("평일 할인", weekdayDiscount);
+        }
+
+        int weekendDiscount = calculateWeekendDiscount(orderMap, orderDate);
+        if (weekendDiscount > 0) {
+            eventDetail.addEvent("주말 할인", weekendDiscount);
+        }
+
+        int specialDiscount = calculateSpecialDiscount(orderDate);
+        if (specialDiscount > 0) {
+            eventDetail.addEvent("특별 할인", specialDiscount);
+        }
+
+        if (isEligibleForGift(totalPrice)) {
+            eventDetail.setGiftMenu("샴페인");
+            eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE);
+        }
+
+        return eventDetail;
     }
 }
