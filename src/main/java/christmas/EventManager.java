@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class EventManager {
     public static boolean isDdayDiscountApplied(int orderDate) {
@@ -38,5 +39,22 @@ public class EventManager {
             return 1000 + (orderDate - 1) * 100;
         }
         return 0;
+    }
+
+    public static int calculateWeekdayDiscount(Map<Menu, Integer> orderMap, int orderDate) {
+        if (isWeekdayDiscountApplied(orderDate)) {
+            return 2023 * getDessertCount(orderMap);
+        }
+        return 0;
+    }
+
+    private static int getDessertCount(Map<Menu, Integer> orderMap) {
+        int dessertCount = 0;
+        for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
+            if (entry.getKey().getCategory() == Category.DESSERT) {
+                dessertCount += entry.getValue();
+            }
+        }
+        return dessertCount;
     }
 }
