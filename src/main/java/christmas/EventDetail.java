@@ -25,11 +25,11 @@ public class EventDetail {
         this.discount += discount;
     }
 
-    public int calculateTotalBenefit() {
+    public int getTotalBenefit() {
         return discount + giftPrice;
     }
 
-    public int calculateDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
@@ -38,7 +38,7 @@ public class EventDetail {
     }
 
     public String getBadge() {
-        int totalBenefit = calculateTotalBenefit();
+        int totalBenefit = getTotalBenefit();
         if (totalBenefit >= 20000) {
             return "산타";
         }

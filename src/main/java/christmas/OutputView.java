@@ -75,7 +75,7 @@ public class OutputView {
     }
 
     public static void printTotalBenefit(EventDetail eventDetail) {
-        int totalBenefit = eventDetail.calculateTotalBenefit();
+        int totalBenefit = eventDetail.getTotalBenefit();
         String formattedTotalBenefit = formatter.format(totalBenefit);
 
         System.out.println("\n<총혜택 금액>");
@@ -89,7 +89,7 @@ public class OutputView {
     public static void printExpectedPayment(OrderInfo orderInfo, EventDetail eventDetail) {
         Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
         int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
-        int totalDiscount = eventDetail.calculateDiscount();
+        int totalDiscount = eventDetail.getDiscount();
         int expectedPayment = totalOrderPrice - totalDiscount;
         String formattedExpectedPayment = formatter.format(expectedPayment);
 
