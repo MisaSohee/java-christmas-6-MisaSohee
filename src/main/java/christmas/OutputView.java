@@ -71,8 +71,14 @@ public class OutputView {
     }
 
     public static void printTotalBenefit(EventDetail eventDetail) {
-        System.out.println("\n<총 혜택 금액>");
-        System.out.println("-" + eventDetail.calculateTotalBenefit() + "원");
+        int totalBenefit = eventDetail.calculateTotalBenefit();
+
+        System.out.println("\n<총혜택 금액>");
+        if (totalBenefit > 0) {
+            System.out.println("-" + totalBenefit + "원");
+            return;
+        }
+        System.out.println("없음");
     }
 
     public static void printExpectedPayment(OrderInfo orderInfo, EventDetail eventDetail) {
@@ -83,5 +89,11 @@ public class OutputView {
 
         System.out.println("\n<할인 후 예상 결제 금액>");
         System.out.println(expectedPayment + "원");
+    }
+
+    public static void printBadge(EventDetail eventDetail) {
+        String badge = eventDetail.getBadge();
+        System.out.println("\n<12월 이벤트 배지>");
+        System.out.println(badge);
     }
 }

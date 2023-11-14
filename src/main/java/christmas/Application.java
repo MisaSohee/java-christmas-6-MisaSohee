@@ -29,5 +29,7 @@ public class Application {
         OutputView.printTotalBenefit(eventDetail);
 
         OutputView.printExpectedPayment(orderInfo,eventDetail);
+
+        OutputView.printBadge(eventDetail);
     }
 }
