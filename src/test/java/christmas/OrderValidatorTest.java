@@ -83,4 +83,13 @@ class OrderValidatorTest {
             OrderValidator.validateNoDuplicateMenuNames(ordersWithDuplicateMenuNames);
         });
     }
+
+    @Test
+    @DisplayName("음료만 주문 검사: 주문 내에 음료만 있을 경우 IllegalArgumentException 발생")
+    void 주문_내에_음료만_있을_경우_IllegalArgumentException_발생() {
+        Map<Menu, Integer> ordersWithOnlyDrinks = Map.of(Menu.from("제로콜라"), 2, Menu.from("레드와인"), 3);
+        assertThrows(IllegalArgumentException.class, () -> {
+            OrderValidator.validateNotOnlyDrinks(ordersWithOnlyDrinks);
+        });
+    }
 }
