@@ -7,40 +7,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderManager {
-
     public static Map<Menu, Integer> manageOrder() {
         Map<Menu, Integer> orderMap = new HashMap<>();
 
         try {
-            String orderInput = InputView.getUserOrderInput();
-
-            OrderValidator.validateNoSpaceInInput(orderInput);
-
-            String[] orders = orderInput.split(",");
-
-            OrderValidator.validateNoDuplicateMenuNames(orders);
-
+            String[] orders = getOrderInput();
             for (String order : orders) {
-                String[] details = order.split("-");
-                String menuName = details[0];
-                String quantityStr = details[1];
-
-                OrderValidator.validateMenuExist(menuName);
-                OrderValidator.validateQuantityIsNumber(quantityStr);
-                OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
-
-                int quantity = Integer.parseInt(quantityStr);
-
-                Menu menu = Menu.from(menuName);
-                orderMap.put(menu, quantity);
+                processOrderItem(order, orderMap);
             }
-
-            OrderValidator.validateTotalMaxQuantity(orderMap);
-            OrderValidator.validateNotOnlyDrinks(orderMap);
+            validateOrderInfo(orderMap);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return manageOrder();
         }
         return orderMap;
+    }
+
+    private static String[] getOrderInput() {
+        String orderInput = InputView.getUserOrderInput();
+        OrderValidator.validateNoSpaceInInput(orderInput);
+        String[] orders = orderInput.split(",");
+        OrderValidator.validateNoDuplicateMenuNames(orders);
+        return orders;
+    }
+
+    private static void validateOrderInfo(Map<Menu, Integer> orderMap) {
+        OrderValidator.validateTotalMaxQuantity(orderMap);
+        OrderValidator.validateNotOnlyDrinks(orderMap);
+    }
+
+    private static void processOrderItem(String order, Map<Menu, Integer> orderMap) {
+        String[] details = order.split("-");
+        String menuName = details[0];
+        String quantityStr = details[1];
+
+        OrderValidator.validateMenuExist(menuName);
+        OrderValidator.validateQuantityIsNumber(quantityStr);
+        OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
+
+        int quantity = Integer.parseInt(quantityStr);
+
+        Menu menu = Menu.from(menuName);
+        orderMap.put(menu, quantity);
     }
 }

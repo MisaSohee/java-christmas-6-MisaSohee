@@ -6,43 +6,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EventManager {
-    public static int applyDdayDiscount(int totalPrice, int orderDate) {
-        if(orderDate <= 25) {
-            int discount = 1000 + (orderDate - 1) * 100;
-            return totalPrice - discount;
-        }
-        return totalPrice;
+    public static boolean isDdayDiscountApplied(int orderDate) {
+        return orderDate <= 25;
     }
 
-    public static int applyWeekdayDiscount(int totalPrice, int orderDate, int numberOfDesserts) {
+    public static boolean isWeekdayDiscountApplied(int orderDate) {
         LocalDate date = LocalDate.of(2023, 12, orderDate);
         DayOfWeek dayOfWeek = date.getDayOfWeek();
-
-        if (dayOfWeek != DayOfWeek.FRIDAY && dayOfWeek != DayOfWeek.SATURDAY) {
-            int discount = 2023 * numberOfDesserts;
-            return totalPrice - discount;
-        }
-        return totalPrice;
+        return dayOfWeek != DayOfWeek.FRIDAY && dayOfWeek != DayOfWeek.SATURDAY;
     }
 
-    public static int applyWeekendDiscount(int totalPrice, int orderDate, int numberOfMainDishes) {
+    public static boolean isWeekendDiscountApplied(int orderDate) {
         LocalDate date = LocalDate.of(2023, 12, orderDate);
         DayOfWeek dayOfWeek = date.getDayOfWeek();
-
-        if (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY) {
-            int discount = 2023 * numberOfMainDishes;
-            return totalPrice - discount;
-        }
-        return totalPrice;
+        return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
     }
 
-    public static int applySpecialDiscount(int totalPrice, int orderDate) {
+    public static boolean isSpecialDiscountApplied(int orderDate) {
         List<Integer> specialDays = Arrays.asList(3, 10, 17, 24, 25, 31);
-
-        if (specialDays.contains(orderDate)) {
-            return totalPrice - 1000;
-        }
-        return totalPrice;
+        return specialDays.contains(orderDate);
     }
 
     public static boolean isEligibleForGift(int totalPriceBeforeDiscount) {
