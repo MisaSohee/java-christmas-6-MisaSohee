@@ -1,5 +1,6 @@
 package christmas;
 
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -54,5 +55,18 @@ public class OutputView {
     public static void printGiftMenu(EventDetail eventDetail) {
         System.out.println("\n<증정 메뉴>");
         System.out.println(eventDetail.getGiftMenu());
+    }
+
+    public static void printEvents(EventDetail eventDetail) {
+        System.out.println("\n<혜택 내역>");
+        List<String> events = eventDetail.getEvents();
+        if (events.isEmpty()) {
+            System.out.println("없음");
+            return;
+        }
+
+        for (String event : events) {
+            System.out.println(event);
+        }
     }
 }

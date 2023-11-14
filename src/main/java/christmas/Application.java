@@ -23,5 +23,7 @@ public class Application {
 
         EventDetail eventDetail = EventManager.calculateEventDetails(orderInfo);
         OutputView.printGiftMenu(eventDetail);
+
+        OutputView.printEvents(eventDetail);
     }
 }

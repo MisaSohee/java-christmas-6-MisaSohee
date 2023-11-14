@@ -16,7 +16,7 @@ public class EventDetail {
 
     public void addEvent(String event, int discount) {
         events.add(event + ": -" + discount + "원");
-        this.discount = discount;
+        this.discount += discount;
     }
 
     public void setGiftMenu(String giftMenu) {
@@ -29,6 +29,10 @@ public class EventDetail {
 
     public void changeGiftMenu(String giftMenu) {
         this.giftMenu = giftMenu + " 1개";
+    }
+
+    public List<String> getEvents() {
+        return events;
     }
 
     public String getGiftMenu() {
