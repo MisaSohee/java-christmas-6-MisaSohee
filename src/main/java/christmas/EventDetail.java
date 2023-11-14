@@ -25,10 +25,6 @@ public class EventDetail {
         this.discount += discount;
     }
 
-    public void setGiftMenu(String giftMenu) {
-        this.giftMenu = giftMenu;
-    }
-
     public int calculateTotalBenefit() {
         return discount + giftPrice;
     }
@@ -39,6 +35,20 @@ public class EventDetail {
 
     public void changeGiftMenu(String giftMenu) {
         this.giftMenu = giftMenu + " 1개";
+    }
+
+    public String getBadge() {
+        int totalBenefit = calculateTotalBenefit();
+        if (totalBenefit >= 20000) {
+            return "산타";
+        }
+        if (totalBenefit >= 10000) {
+            return "트리";
+        }
+        if (totalBenefit >= 5000) {
+            return "별";
+        }
+        return "없음";
     }
 
     public List<String> getEvents() {
