@@ -40,4 +40,14 @@ class OrderValidatorTest {
             OrderValidator.validateTotalMaxQuantity(overMaxOrderMap);
         });
     }
+
+    @Test
+    @DisplayName("수량 유효성 검사: 수량이 숫자가 아닐 경우 IllegalArgumentException 발생")
+    void 수량이_숫자가_아닐_경우_IllegalArgumentException_발생() {
+        String nonNumberQuantity = "abc";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            OrderValidator.validateQuantityIsNumber(nonNumberQuantity);
+        });
+    }
 }
