@@ -1,9 +1,12 @@
 package christmas;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+    private static NumberFormat formatter = NumberFormat.getInstance();
+
     public void printEventGuidelines(){
         System.out.println("""
                 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
@@ -49,7 +52,8 @@ public class OutputView {
     public static void printTotalOrderPrice(OrderInfo orderInfo) {
         Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
         int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
-        System.out.println("\n<할인 전 총주문 금액>\n" + totalOrderPrice+ "원");
+        String formattedTotalOrderPrice = formatter.format(totalOrderPrice);
+        System.out.println("\n<할인 전 총주문 금액>\n" + formattedTotalOrderPrice + "원");
     }
 
     public static void printGiftMenu(EventDetail eventDetail) {
@@ -72,10 +76,11 @@ public class OutputView {
 
     public static void printTotalBenefit(EventDetail eventDetail) {
         int totalBenefit = eventDetail.calculateTotalBenefit();
+        String formattedTotalBenefit = formatter.format(totalBenefit);
 
         System.out.println("\n<총혜택 금액>");
         if (totalBenefit > 0) {
-            System.out.println("-" + totalBenefit + "원");
+            System.out.println("-" + formattedTotalBenefit + "원");
             return;
         }
         System.out.println("없음");
@@ -86,9 +91,10 @@ public class OutputView {
         int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
         int totalDiscount = eventDetail.calculateDiscount();
         int expectedPayment = totalOrderPrice - totalDiscount;
+        String formattedExpectedPayment = formatter.format(expectedPayment);
 
         System.out.println("\n<할인 후 예상 결제 금액>");
-        System.out.println(expectedPayment + "원");
+        System.out.println(formattedExpectedPayment + "원");
     }
 
     public static void printBadge(EventDetail eventDetail) {
