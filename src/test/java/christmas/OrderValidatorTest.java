@@ -65,7 +65,7 @@ class OrderValidatorTest {
     @DisplayName("주문 형식 유효성 검사: 주문이 '-'를 포함하지 않을 경우 IllegalArgumentException 발생")
     void 주문이_하이픈을_포함하지_않을_경우_IllegalArgumentException_발생() {
         // Given
-        String orderWithoutHyphen = "티본스테이크 1,바비큐립 1";
+        String orderWithoutHyphen = "티본스테이크 1,초코케이크 1";
 
         // Then
         assertThrows(IllegalArgumentException.class, () -> {
