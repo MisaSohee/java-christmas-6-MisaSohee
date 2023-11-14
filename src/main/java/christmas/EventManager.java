@@ -97,29 +97,31 @@ public class EventManager {
         Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
         int totalPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
 
-        int ddayDiscount = calculateDdayDiscount(orderDate);
-        if (ddayDiscount > 0) {
-            eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount, false);
-        }
+        if (totalPrice >= 10000) {
+            int ddayDiscount = calculateDdayDiscount(orderDate);
+            if (ddayDiscount > 0) {
+                eventDetail.addEvent("크리스마스 디데이 할인", ddayDiscount, false);
+            }
 
-        int weekdayDiscount = calculateWeekdayDiscount(orderMap, orderDate);
-        if (weekdayDiscount > 0) {
-            eventDetail.addEvent("평일 할인", weekdayDiscount, false);
-        }
+            int weekdayDiscount = calculateWeekdayDiscount(orderMap, orderDate);
+            if (weekdayDiscount > 0) {
+                eventDetail.addEvent("평일 할인", weekdayDiscount, false);
+            }
 
-        int weekendDiscount = calculateWeekendDiscount(orderMap, orderDate);
-        if (weekendDiscount > 0) {
-            eventDetail.addEvent("주말 할인", weekendDiscount, false);
-        }
+            int weekendDiscount = calculateWeekendDiscount(orderMap, orderDate);
+            if (weekendDiscount > 0) {
+                eventDetail.addEvent("주말 할인", weekendDiscount, false);
+            }
 
-        int specialDiscount = calculateSpecialDiscount(orderDate);
-        if (specialDiscount > 0) {
-            eventDetail.addEvent("특별 할인", specialDiscount, false);
-        }
+            int specialDiscount = calculateSpecialDiscount(orderDate);
+            if (specialDiscount > 0) {
+                eventDetail.addEvent("특별 할인", specialDiscount, false);
+            }
 
-        if (isEligibleForGift(totalPrice)) {
-            eventDetail.changeGiftMenu("샴페인");
-            eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE, true);
+            if (isEligibleForGift(totalPrice)) {
+                eventDetail.changeGiftMenu("샴페인");
+                eventDetail.addEvent("증정 이벤트", GIFT_MENU_PRICE, true);
+            }
         }
 
         return eventDetail;
