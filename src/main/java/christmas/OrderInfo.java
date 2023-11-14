@@ -19,7 +19,7 @@ public class OrderInfo {
         return orderMap;
     }
 
-    public int calculateTotalOrderPrice() {
+    public static int calculateTotalOrderPrice(Map<Menu, Integer> orderMap) {
         int totalOrderPrice = 0;
         for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
             Menu menu = entry.getKey();

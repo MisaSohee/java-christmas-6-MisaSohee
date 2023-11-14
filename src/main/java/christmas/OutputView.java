@@ -37,11 +37,17 @@ public class OutputView {
     }
 
     public static void printOrder(Map<Menu, Integer> orderMap, int date) {
-        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
         System.out.println("<주문 메뉴>");
         for (Menu menu : orderMap.keySet()) {
             Integer quantity = orderMap.get(menu);
             System.out.println(menu.getName() + " " + quantity + "개");
         }
+    }
+
+    public static void printTotalOrderPrice(OrderInfo orderInfo) {
+        Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
+        int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
+        System.out.println("<할인 전 총주문 금액>\n" + totalOrderPrice+ "원");
     }
 }

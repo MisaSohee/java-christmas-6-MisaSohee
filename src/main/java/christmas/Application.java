@@ -18,5 +18,7 @@ public class Application {
         OrderInfo orderInfo = OrderManager.manageOrder(date);
         Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
         OutputView.printOrder(orderMap, date);
+
+        OutputView.printTotalOrderPrice(orderInfo);
     }
 }
