@@ -16,9 +16,14 @@ public class EventDetail {
 
     public void addEvent(String event, int discount) {
         events.add(event + ": -" + discount + "원");
+        this.discount = discount;
     }
 
     public void setGiftMenu(String giftMenu) {
         this.giftMenu = giftMenu;
+    }
+
+    public int calculateTotalBenefit() {
+        return discount;
     }
 }

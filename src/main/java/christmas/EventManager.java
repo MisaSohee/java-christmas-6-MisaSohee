@@ -66,7 +66,7 @@ public class EventManager {
 
     public static int calculateGiftDiscount(int totalPriceBeforeDiscount) {
         if (isEligibleForGift(totalPriceBeforeDiscount)) {
-            return 25000;
+            return GIFT_MENU_PRICE;
         }
         return 0;
     }
