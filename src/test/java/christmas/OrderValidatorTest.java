@@ -73,4 +73,14 @@ class OrderValidatorTest {
             OrderValidator.validateOrderFormat(orderWithoutHyphen);
         });
     }
+
+    @Test
+    @DisplayName("메뉴 이름 중복 검사: 주문 내에 동일한 메뉴 이름이 중복될 경우 IllegalArgumentException 발생")
+    void 주문_내에_동일한_메뉴_이름이_중복될_경우_IllegalArgumentException_발생() {
+        String[] ordersWithDuplicateMenuNames = {"양송이수프-2", "양송이수프-3"};
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            OrderValidator.validateNoDuplicateMenuNames(ordersWithDuplicateMenuNames);
+        });
+    }
 }
