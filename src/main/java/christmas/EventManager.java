@@ -62,6 +62,13 @@ public class EventManager {
         return 0;
     }
 
+    public static int calculateGiftDiscount(int totalPriceBeforeDiscount) {
+        if (isEligibleForGift(totalPriceBeforeDiscount)) {
+            return 25000;
+        }
+        return 0;
+    }
+
     private static int getDessertCount(Map<Menu, Integer> orderMap) {
         int dessertCount = 0;
         for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
