@@ -48,6 +48,13 @@ public class EventManager {
         return 0;
     }
 
+    public static int calculateWeekendDiscount(Map<Menu, Integer> orderMap, int orderDate) {
+        if (isWeekendDiscountApplied(orderDate)) {
+            return 2023 * getMainCount(orderMap);
+        }
+        return 0;
+    }
+
     private static int getDessertCount(Map<Menu, Integer> orderMap) {
         int dessertCount = 0;
         for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
@@ -56,5 +63,15 @@ public class EventManager {
             }
         }
         return dessertCount;
+    }
+
+    private static int getMainCount(Map<Menu, Integer> orderMap) {
+        int mainCount = 0;
+        for (Map.Entry<Menu, Integer> entry : orderMap.entrySet()) {
+            if (entry.getKey().getCategory() == Category.MAIN) {
+                mainCount += entry.getValue();
+            }
+        }
+        return mainCount;
     }
 }
