@@ -48,6 +48,6 @@ public class OutputView {
     public static void printTotalOrderPrice(OrderInfo orderInfo) {
         Map<Menu, Integer> orderMap = orderInfo.getOrderMap();
         int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
-        System.out.println("<할인 전 총주문 금액>\n" + totalOrderPrice+ "원");
+        System.out.println("\n<할인 전 총주문 금액>\n" + totalOrderPrice+ "원");
     }
 }

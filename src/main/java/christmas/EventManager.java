@@ -32,4 +32,11 @@ public class EventManager {
 
         return totalPriceBeforeDiscount >= GIFT_THRESHOLD;
     }
+
+    public static int calculateDdayDiscount(int orderDate) {
+        if (isDdayDiscountApplied(orderDate)) {
+            return 1000 + (orderDate - 1) * 100;
+        }
+        return 0;
+    }
 }
