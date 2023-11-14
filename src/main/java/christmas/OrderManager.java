@@ -22,6 +22,10 @@ public class OrderManager {
 
     private static String[] getOrderInput() {
         String orderInput = InputView.getUserOrderInput();
+        return parseOrderInput(orderInput);
+    }
+
+    public static String[] parseOrderInput(String orderInput) {
         OrderValidator.validateNoSpaceInInput(orderInput);
         String[] orders = orderInput.split(",");
         OrderValidator.validateNoDuplicateMenuNames(orders);
