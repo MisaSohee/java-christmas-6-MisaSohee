@@ -1,8 +1,5 @@
 package christmas;
 
-import org.junit.jupiter.api.Order;
-import org.mockito.internal.matchers.Or;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +34,8 @@ public class OrderManager {
     }
 
     private static void processOrderItem(String order, Map<Menu, Integer> orderMap) {
+        OrderValidator.validateOrderFormat(order);
+
         String[] details = order.split("-");
         String menuName = details[0];
         String quantityStr = details[1];
