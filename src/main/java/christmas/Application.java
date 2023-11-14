@@ -25,5 +25,7 @@ public class Application {
         OutputView.printGiftMenu(eventDetail);
 
         OutputView.printEvents(eventDetail);
+
+        OutputView.printTotalBenefit(eventDetail);
     }
 }
