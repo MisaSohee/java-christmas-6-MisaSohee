@@ -22,7 +22,11 @@ public class OrderValidator {
     public static void validateTotalMaxQuantity(Map<Menu, Integer> orderMap) {
         int totalQuantity = orderMap.values().stream().mapToInt(Integer::intValue).sum();
         if (totalQuantity > 20) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException("""
+        [ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 
+        (e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)
+        다시 입력해 주세요.
+        """);
         }
     }
 
