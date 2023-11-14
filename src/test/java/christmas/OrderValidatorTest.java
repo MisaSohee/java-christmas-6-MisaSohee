@@ -3,6 +3,9 @@ package christmas;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderValidatorTest {
@@ -27,4 +30,14 @@ class OrderValidatorTest {
         });
     }
 
+    @Test
+    @DisplayName("전체 주문 수량 유효성 검사: 전체 주문 수량이 최대치를 초과할 경우 IllegalArgumentException 발생")
+    void 전체_주문_수량이_최대치를_초과할_경우_IllegalArgumentException_발생() {
+        Map<Menu, Integer> overMaxOrderMap = new HashMap<>();
+        overMaxOrderMap.put(Menu.from("티본스테이크"), 21);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            OrderValidator.validateTotalMaxQuantity(overMaxOrderMap);
+        });
+    }
 }
