@@ -69,4 +69,9 @@ public class OrderValidator {
         }
         throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다. 다른 메뉴를 추가해주세요.");
     }
+
+    public static void validateOrder(Map<Menu, Integer> orderMap) {
+        validateTotalMaxQuantity(orderMap);
+        validateNotOnlyDrinks(orderMap);
+    }
 }
