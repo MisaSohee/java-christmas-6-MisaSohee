@@ -13,6 +13,11 @@ public class OrderManager {
                 processOrderItem(order, orderMap);
             }
             validateOrderInfo(orderMap);
+
+            int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
+            if (totalOrderPrice >= 10000) {
+                EventParticipantManager.increaseParticipantCount();
+            }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return manageOrder(visitDate);
