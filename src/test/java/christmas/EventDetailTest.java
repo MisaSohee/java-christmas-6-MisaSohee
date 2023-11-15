@@ -35,4 +35,10 @@ class EventDetailTest {
         assertEquals(6000, eventDetail.getTotalBenefit());
     }
 
+    @Test
+    @DisplayName("선물 메뉴 변경 테스트")
+    public void changeGiftMenuTest() {
+        eventDetail.changeGiftMenu("샴페인");
+        assertEquals("샴페인 1개", eventDetail.getGiftMenu());
+    }
 }
