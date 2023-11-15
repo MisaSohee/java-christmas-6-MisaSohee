@@ -25,6 +25,16 @@ public class OrderProcessor {
     }
 
     private static void processOrderItem(String order, Map<Menu, Integer> orderMap) {
+        validateOrderItem(order);
+
+        String menuName = getMenuNameFromOrderItem(order);
+        int quantity = getQuantityFromOrderItem(order);
+
+        Menu menu = Menu.from(menuName);
+        orderMap.put(menu, quantity);
+    }
+
+    private static void validateOrderItem(String order) {
         OrderValidator.validateOrderFormat(order);
 
         String[] details = order.split("-");
@@ -34,10 +44,13 @@ public class OrderProcessor {
         OrderValidator.validateMenuExist(menuName);
         OrderValidator.validateQuantityIsNumber(quantityStr);
         OrderValidator.validateQuantityRange(Integer.parseInt(quantityStr));
+    }
 
-        int quantity = Integer.parseInt(quantityStr);
+    private static String getMenuNameFromOrderItem(String order) {
+        return order.split("-")[0];
+    }
 
-        Menu menu = Menu.from(menuName);
-        orderMap.put(menu, quantity);
+    private static int getQuantityFromOrderItem(String order) {
+        return Integer.parseInt(order.split("-")[1]);
     }
 }
