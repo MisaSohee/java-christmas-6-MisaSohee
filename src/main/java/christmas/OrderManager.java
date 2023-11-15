@@ -6,23 +6,22 @@ import java.util.Map;
 public class OrderManager {
     public static OrderInfo manageOrder(int visitDate) {
         Map<Menu, Integer> orderMap = new HashMap<>();
-
         try {
-            String[] orders = getOrderInput();
-            for (String order : orders) {
-                processOrderItem(order, orderMap);
-            }
-            validateOrderInfo(orderMap);
-
-            int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
-            if (totalOrderPrice >= 10000) {
-                EventParticipantManager.increaseParticipantCount();
-            }
+            processOrders(orderMap);
+            validateOrder(orderMap);
+            checkEventParticipant(orderMap);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return manageOrder(visitDate);
         }
         return new OrderInfo(visitDate, orderMap);
+    }
+
+    private static void processOrders(Map<Menu, Integer> orderMap) {
+        String[] orders = getOrderInput();
+        for (String order : orders) {
+            processOrderItem(order, orderMap);
+        }
     }
 
     private static String[] getOrderInput() {
@@ -37,7 +36,7 @@ public class OrderManager {
         return orders;
     }
 
-    private static void validateOrderInfo(Map<Menu, Integer> orderMap) {
+    private static void validateOrder(Map<Menu, Integer> orderMap) {
         OrderValidator.validateTotalMaxQuantity(orderMap);
         OrderValidator.validateNotOnlyDrinks(orderMap);
     }
@@ -57,5 +56,12 @@ public class OrderManager {
 
         Menu menu = Menu.from(menuName);
         orderMap.put(menu, quantity);
+    }
+
+    private static void checkEventParticipant(Map<Menu, Integer> orderMap) {
+        int totalOrderPrice = OrderInfo.calculateTotalOrderPrice(orderMap);
+        if (totalOrderPrice >= 10000) {
+            EventParticipantManager.increaseParticipantCount();
+        }
     }
 }
