@@ -84,4 +84,15 @@ class EventManagerTest {
     public void 특별할인액계산_테스트() {
         assertEquals(0, EventManager.calculateSpecialDiscount(orderInfo.getVisitDate()));
     }
+
+    @DisplayName("이벤트 상세 계산 테스트")
+    @Test
+    public void 이벤트상세계산_테스트() {
+        EventDetail eventDetail = EventManager.calculateEventDetails(orderInfo);
+
+        assertEquals(6346, eventDetail.getDiscount());
+        assertEquals("샴페인 1개", eventDetail.getGiftMenu());
+        assertEquals(31346, eventDetail.getTotalBenefit());
+        assertEquals("산타", eventDetail.getBadge());
+    }
 }
