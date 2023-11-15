@@ -53,4 +53,10 @@ class EventManagerTest {
         int totalPriceBeforeDiscount = OrderInfo.calculateTotalOrderPrice(orderInfo.getOrderMap());
         assertTrue(EventManager.isEligibleForGift(totalPriceBeforeDiscount));
     }
+
+    @DisplayName("D-Day 할인액 계산 테스트")
+    @Test
+    public void 디데이할인액계산_테스트() {
+        assertEquals(2300, EventManager.calculateDdayDiscount(orderInfo.getVisitDate()));
+    }
 }
