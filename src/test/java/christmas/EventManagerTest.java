@@ -40,4 +40,10 @@ class EventManagerTest {
     public void 주말할인적용가능여부_테스트() {
         assertFalse(EventManager.isWeekendDiscountApplied(orderInfo.getVisitDate()));
     }
+
+    @DisplayName("특별 할인 적용 가능 여부 테스트")
+    @Test
+    public void 특별할인적용가능여부_테스트() {
+        assertFalse(EventManager.isSpecialDiscountApplied(orderInfo.getVisitDate()));
+    }
 }
