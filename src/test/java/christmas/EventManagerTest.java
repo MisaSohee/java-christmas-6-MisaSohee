@@ -69,4 +69,14 @@ class EventManagerTest {
         assertEquals(4046, EventManager.calculateWeekdayDiscount(orderInfo.getOrderMap(), orderInfo.getVisitDate()));
     }
 
+    @DisplayName("주말 할인액 계산 테스트")
+    @Test
+    public void 주말할인액계산_테스트() {
+        int visitDate = 15;
+        OrderInfo orderInfo = new OrderInfo(visitDate, orderMap);
+
+        int expectedDiscount = 2023 * 3;
+        assertEquals(expectedDiscount, EventManager.calculateWeekendDiscount(orderInfo.getOrderMap(), orderInfo.getVisitDate()));
+    }
+
 }
