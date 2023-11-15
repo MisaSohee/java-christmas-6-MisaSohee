@@ -25,4 +25,14 @@ class EventDetailTest {
         assertEquals(5000, eventDetail.getTotalBenefit() - eventDetail.getDiscount());
     }
 
+    @Test
+    @DisplayName("총 혜택 계산 테스트")
+    public void getTotalBenefitTest() {
+        eventDetail.addEvent("테스트 이벤트", 1000, false);
+        assertEquals(1000, eventDetail.getTotalBenefit());
+
+        eventDetail.addEvent("증정 이벤트", 5000, true);
+        assertEquals(6000, eventDetail.getTotalBenefit());
+    }
+
 }
