@@ -46,4 +46,11 @@ class EventManagerTest {
     public void 특별할인적용가능여부_테스트() {
         assertFalse(EventManager.isSpecialDiscountApplied(orderInfo.getVisitDate()));
     }
+
+    @DisplayName("증정 적격 여부 테스트")
+    @Test
+    public void 증정적격여부_테스트() {
+        int totalPriceBeforeDiscount = OrderInfo.calculateTotalOrderPrice(orderInfo.getOrderMap());
+        assertTrue(EventManager.isEligibleForGift(totalPriceBeforeDiscount));
+    }
 }
