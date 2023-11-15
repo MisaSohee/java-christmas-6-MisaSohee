@@ -19,7 +19,7 @@ class EventManagerTest {
         orderMap.put(Menu.TBONESTEAK, 3);
         orderMap.put(Menu.CHOCOCAKE, 2);
 
-        int visitDate = 15;
+        int visitDate = 14;
         orderInfo = new OrderInfo(visitDate, orderMap);
     }
 
@@ -28,4 +28,11 @@ class EventManagerTest {
     public void 디데이할인적용가능여부_테스트() {
         assertTrue(EventManager.isDdayDiscountApplied(orderInfo.getVisitDate()));
     }
+
+    @DisplayName("평일 할인 적용 가능 여부 테스트")
+    @Test
+    public void 평일할인적용가능여부_테스트() {
+        assertTrue(EventManager.isWeekdayDiscountApplied(orderInfo.getVisitDate()));
+    }
+
 }
