@@ -6,7 +6,6 @@ public class OrderService {
 
     public void runService() {
         outputView.printEventGuidelines();
-        outputView.printMenu();
         outputView.printMessage();
 
         int date = inputView.readDate();
