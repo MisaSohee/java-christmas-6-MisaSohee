@@ -36,9 +36,25 @@ class EventDetailTest {
     }
 
     @Test
-    @DisplayName("선물 메뉴 변경 테스트")
+    @DisplayName("증정품 입력 변경 테스트")
     public void changeGiftMenuTest() {
         eventDetail.changeGiftMenu("샴페인");
         assertEquals("샴페인 1개", eventDetail.getGiftMenu());
+    }
+
+    @Test
+    @DisplayName("뱃지 반환 테스트")
+    public void getBadgeTest() {
+        eventDetail.addEvent("테스트 이벤트", 1000, false);
+        assertEquals("없음", eventDetail.getBadge());
+
+        eventDetail.addEvent("테스트 이벤트", 4000, false);
+        assertEquals("별", eventDetail.getBadge());
+
+        eventDetail.addEvent("테스트 이벤트", 5000, false);
+        assertEquals("트리", eventDetail.getBadge());
+
+        eventDetail.addEvent("테스트 이벤트", 10000, false);
+        assertEquals("산타", eventDetail.getBadge());
     }
 }
